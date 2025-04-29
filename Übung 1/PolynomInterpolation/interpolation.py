@@ -33,10 +33,21 @@ def newton_equidistant(func: Callable[[float], float], bnds: list[float], n_eval
     [xx, yy] : list[np.ndarray]
         Sample points and values
     """
-    xx = []
-    yy = []
-    x  = []
-    y  = []
+    a, b = bnds
+    xx = np.linspace(a, b, n)
+    yy = func(xx)
+    co = yy.astype(float).copy()
+
+    for j in range(1, n_sample_pts):
+        for i in range(n_sample_pts - 1, j - 1, -1):
+            co[i] = (co[i] - co[i - 1]) / (xx[i] - xx[i - j])
+
+    x = np.linspace(a, b, n_eval_pts)
+    y = np.zeros_like(x, dtype=float)
+
+    for c, xv in zip(co[::-1], xx[::-1]):
+        y = y * (x - xv) + c
+
     return [x, y], [xx, yy] # DO NOT CHANGE
 
 # CAUTION: The input arguments of the following method MUST NOT be changed.
@@ -64,10 +75,25 @@ def newton_chebyshev(func: Callable[[float], float], bnds: list[float], n_eval_p
     [xx, yy] : list[np.ndarray]
         Sample points and values
     """
-    xx = []
-    yy = []
-    x  = []
-    y  = []
+    a, b = bnds
+    mid = 0.5 * (a + b)
+    half = 0.5 * (b - a)
+
+    k = np.arange(n_sample_pts)
+    xx = mid + half * np.cos((2 * k + 1) * np.pi / (2 * n_sample_pts))
+    yy = func(xx)
+
+    coeffs = yy.astype(float).copy()
+    for j in range(1, n_sample_pts):
+        for i in range(n_sample_pts - 1, j - 1, -1):
+            coeffs[i] = (coeffs[i] - coeffs[i - 1]) / (xx[i] - xx[i - j])
+
+    x = np.linspace(a, b, n_eval_pts)
+    y = np.zeros_like(x, dtype=float)
+
+    for c, xv in zip(coeffs[::-1], xx[::-1]):
+        y = y * (x - xv) + c
+        
     return [x, y], [xx, yy] # DO NOT CHANGE
 
 # CAUTION: The input arguments of the following method MUST NOT be changed.
