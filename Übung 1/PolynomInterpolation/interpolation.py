@@ -34,7 +34,7 @@ def newton_equidistant(func: Callable[[float], float], bnds: list[float], n_eval
         Sample points and values
     """
     a, b = bnds
-    xx = np.linspace(a, b, n)
+    xx = np.linspace(a, b, n_sample_pts)
     yy = func(xx)
     co = yy.astype(float).copy()
 
@@ -121,10 +121,14 @@ def cubic_spline_equidistant(func: Callable[[float], float], bnds: list[float], 
     [xx, yy] : list[np.ndarray]
         Sample points and values
     """
-    xx = []
-    yy = []
-    x  = []
-    y  = []
+    a, b = bnds
+    xx = np.linspace(a, b, n_sample_pts)
+    yy = func(xx)
+
+    spline = CubicSpline(xx, yy)        # Spline create
+    x = np.linspace(a, b, n_eval_pts)
+    y = spline(x)                       # test
+
     return [x, y], [xx, yy] # DO NOT CHANGE
 
 # CAUTION: The input arguments of the following method MUST NOT be changed.
@@ -152,8 +156,19 @@ def cubic_spline_chebyshev(func: Callable[[float], float], bnds: list[float], n_
     [xx, yy] : list[np.ndarray]
         Sample points and values
     """
-    xx = []
-    yy = []
-    x  = []
-    y  = []
+    a, b = bnds
+    k = np.arange(n_sample_pts)
+    mid = 0.5 * (a + b)
+    half = 0.5 * (b - a)
+    xx = mid + half * np.cos((2 * k + 1) * np.pi / (2 * n_sample_pts))
+    yy = func(xx)
+
+    sorted_indices = np.argsort(xx)
+    xx = xx[sorted_indices]
+    yy = yy[sorted_indices]
+
+    spline = CubicSpline(xx, yy)
+    x = np.linspace(a, b, n_eval_pts)
+    y = spline(x)
+
     return [x, y], [xx, yy] # DO NOT CHANGE
