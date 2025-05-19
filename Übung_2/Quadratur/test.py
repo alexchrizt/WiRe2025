@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from quadrature import newton_cotes_weights, newton_cotes_quadrature, global_newton_cotes_quadrature, monte_carlo_quadrature
+from Übung_2.Quadratur.quadrature import newton_cotes_weights, newton_cotes_quadrature, global_newton_cotes_quadrature, monte_carlo_quadrature
 
 class TestInterpolation(unittest.TestCase):
     # These tests check whether or not input and output has the correct
