@@ -24,11 +24,11 @@ def newton_cotes_weights(n: int) -> np.ndarray[float]:
 
     # integrate every L basis polynomial -> weights
     for k in range(n + 1):  
-        current_node_k = nodes[k]
+        current_node = nodes[k]
         denominator = 1.0
         for j, node_j in enumerate(nodes):
             if j != k:
-                denominator *= (current_node_k - node_j)
+                denominator *= (current_node - node_j)
 
         def L_k_integrate(x: float) -> float: # assume denom non zero, calc the k-th Lagrange polynomial
             numerator = 1.0
@@ -37,7 +37,7 @@ def newton_cotes_weights(n: int) -> np.ndarray[float]:
                     numerator *= (x - node_j)
             return numerator / denominator
 
-        weights[k], _ = integrate.quad(L_k_integrate, 0, 1) # quad returns: (integral_value, estimated_error)
+        weights[k], _ = integrate.quad(L_k_integrate, 0, 1) # quad returns: (value, error)
     
     return weights # DO NOT CHANGE
 
