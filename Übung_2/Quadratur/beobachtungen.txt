@@ -1,26 +1,24 @@
 # 2.3 Plots beobachtungen #
 
-Beobachtungen zu Newton-Cotes (lokal, n = 1 bis 20):
-----------------------------------------------------
+Beobachtungen zu Newton_Cotes.pdf (lokal, n = 1 bis 20):
 - Die Approximationswerte konvergieren relativ schnell gegen den analytischen Wert.
 - Für kleinere n (z. B. n = 1, 2) sind die Abweichungen noch relativ groß.
 - Ab etwa n = 7 bis 8 wird der Wert sehr stabil.
 - Bei n > 10 treten kaum noch nennenswerte Verbesserungen auf – die Methode konvergiert.
 - Newton-Cotes scheint in diesem Fall effizient und stabil bei mittlerer Ordnung zu sein.
 
-Beobachtungen zu Monte-Carlo (n = 1 bis 10000):
------------------------------------------------
+Beobachtungen zu Monte_Carlo.pdf (n = 1 bis 10000):
 - Die Ergebnisse schwanken stark bei kleinen n (starker Zufallseinfluss).
 - Je größer n wird, desto näher liegt der Wert am analytischen Integral.
 - Auch bei großen n bleiben kleine Schwankungen sichtbar – typisch für Monte-Carlo-Verfahren.
 - Der Verlauf ist insgesamt unruhiger und erfordert deutlich höhere n, um ein vergleichbares Ergebnis wie bei Newton-Cotes zu erreichen.
 - Das Verfahren ist einfach zu implementieren, aber weniger effizient als Newton-Cotes in diesem Fall.
 
-[Local_Convergence_Plot.pdf]
+Beobachtungen zu Local_Convergence_Plot.pdf
 Die Trapezregel (n=1) zeigt die erwartete Konvergenzrate von O(h^2), während die Simpsonregel (n=2) schneller mit O(h^4) konvergiert. Beide Fehlerkurven verlaufen nahezu parallel zu den theoretischen Referenzlinien im log-log-Diagramm.
 
-[Global_Convergence_Plot.pdf]
+Beobachtungen zu Global_Convergence_Plot.pdf
 Auch bei der summierten Newton-Cotes-Quadratur sinken die Fehler bei zunehmender Anzahl an Teilintervallen m. Die Trapezregel konvergiert mit O(h^2), Simpson mit O(h^4), was durch den Vergleich mit den Referenzlinien im log-log-Plot bestätigt wird.
 
-[Monte_Carlo_Convergence_Plot.pdf]
+Beobachtungen zu Monte_Carlo_Convergence_Plot.pdf
 Die Monte-Carlo-Quadratur zeigt eine langsame Konvergenz mit O(1/srqt(n)), unabhängig von der Dimension. Der Fehlerverlauf liegt erwartungsgemäß in der Nähe der theoretischen Kurve und bestätigt das Verhalten des probabilistischen Verfahrens.
