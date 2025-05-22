@@ -1,1 +1,17 @@
 # 2.3 Plots beobachtungen #
+
+Beobachtungen zu Newton-Cotes (lokal, n = 1 bis 20):
+----------------------------------------------------
+- Die Approximationswerte konvergieren relativ schnell gegen den analytischen Wert.
+- Für kleinere n (z. B. n = 1, 2) sind die Abweichungen noch relativ groß.
+- Ab etwa n = 7 bis 8 wird der Wert sehr stabil.
+- Bei n > 10 treten kaum noch nennenswerte Verbesserungen auf – die Methode konvergiert.
+- Newton-Cotes scheint in diesem Fall effizient und stabil bei mittlerer Ordnung zu sein.
+
+Beobachtungen zu Monte-Carlo (n = 1 bis 10000):
+-----------------------------------------------
+- Die Ergebnisse schwanken stark bei kleinen n (starker Zufallseinfluss).
+- Je größer n wird, desto näher liegt der Wert am analytischen Integral.
+- Auch bei großen n bleiben kleine Schwankungen sichtbar – typisch für Monte-Carlo-Verfahren.
+- Der Verlauf ist insgesamt unruhiger und erfordert deutlich höhere n, um ein vergleichbares Ergebnis wie bei Newton-Cotes zu erreichen.
+- Das Verfahren ist einfach zu implementieren, aber weniger effizient als Newton-Cotes in diesem Fall.
