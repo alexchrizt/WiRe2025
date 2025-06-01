@@ -18,7 +18,9 @@ def forward_difference_quotient(f: Callable[[float],float], x: float, h:float) -
     Output:
         fdq: float  -> Approximation of f'(x)
     """
-    fdq = 0
+    if h <= 0:
+        raise ValueError("Stepwidth h must be positive.")
+    fdq = (f(x + h) - f(x)) / h
     return fdq
 
 def backward_difference_quotient(f: Callable[[float],float], x: float, h:float) -> float:
@@ -31,7 +33,9 @@ def backward_difference_quotient(f: Callable[[float],float], x: float, h:float) 
     Output:
         fdq: float  -> Approximation of f'(x)
     """
-    bdq = 0
+    if h <= 0:
+        raise ValueError("Stepwidth h must be positive.")
+    bdq = (f(x) - f(x - h)) / h
     return bdq
 
 def central_difference_quotient(f: Callable[[float],float], x: float, h:float) -> float:
@@ -44,7 +48,9 @@ def central_difference_quotient(f: Callable[[float],float], x: float, h:float) -
     Output:
         cdq: float  -> Approximation of f'(x)
     """
-    cdq = 0
+    if h <= 0:
+        raise ValueError("Stepwidth h must be positive.")
+    cdq = (f(x + h) - f(x - h)) / (2 * h)
     return cdq
 
 def explicit_euler(rhs: Callable[[float], float], y0: float, t0: float, T: float, N: int) -> [np.ndarray[float], np.ndarray[float]]:
@@ -60,8 +66,14 @@ def explicit_euler(rhs: Callable[[float], float], y0: float, t0: float, T: float
         t : np.ndarray -> Array of moments in time
         y : np.ndarray -> Array of the solution
     """
-    t = []
-    y = []
+    h = (T - t0) / N
+    t = np.linspace(t0, T, N + 1)
+    y = np.zeros(N + 1)
+    y[0] = y0
+
+    for i in range(N):
+        y[i + 1] = y[i] + h * rhs(t[i], y[i])
+
     return t, y
 
 
@@ -78,6 +90,18 @@ def implicit_euler(rhs: Callable[[float], float], y0: float, t0: float, T: float
         t : np.ndarray -> Array of moments in time
         y : np.ndarray -> Array of the solution
     """
-    t = []
-    y = []
+    h = (T - t0) / N
+    t = np.linspace(t0, T, N + 1)
+    y = np.zeros(N + 1)
+    y[0] = y0
+
+    for i in range(N):
+        t_next = t[i + 1]
+        y_guess = y[i]
+
+        def F(y_next):
+            return y_next - y[i] - h * rhs(t_next, y_next)
+
+        y[i + 1] = fsolve(F, y_guess)[0]  # fsolve returns an array, take scalar
+
     return t, y
