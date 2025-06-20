@@ -68,7 +68,6 @@ def gauss(A: np.ndarray[float], b: np.ndarray[float], tol: float = 1e-12) -> np.
             raise ValueError(f"Zero pivot encountered at row {i} during back substitution.")
         x[i] = (b[i] - np.dot(A[i, i + 1:], x[i + 1:])) / A[i, i]
 
-    #TODO Do not forget to guarantee that tol is an optional input argument with standard value 1e-12
     return x
 
 
