@@ -1,0 +1,17 @@
+1. Ausgabe: 
+Solution for 4.2a: [1. 1. 1. 1. 1.]
+Solution for 4.2a: [1. 1. 1. 1. 1.] 
+
+Beobachtung: Das 5×5-System löst sich mit Gauß‐Elimination exakt zu x = (1,1,1,1,1)^T, weil A strikt diagonaldominant ist.
+
+2. Ausgabe: UserWarning: Matrix A is not strictly diagonally dominant at row 0.
+            warnings.warn(f"Matrix A is not strictly diagonally dominant at row {i}.", UserWarning)
+            Error solving 4.2b: Pivot too small at row 1: |A[1,1]| <= 1e-12
+
+Beobachtung: A_2 ist nicht diagonaldominant (in Zeile 0).
+                In Eliminationsschritt 1 wird der Pivot A[1,1] zu Null (Z_2 <- Z_2 – 2*Z_1), wodurch der Algorithmus abbricht.
+
+
+3. Graph: Mit zunehmender Konditionszahl steigt der relative Fehler im Doppel-Log-Diagramm nahezu linear an.
+
+Beobachtung: Schlecht konditionierte Matrizen verstärken kleine Störungen im rechtseitigen Vektor b stark.
