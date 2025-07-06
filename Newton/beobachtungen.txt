@@ -1,0 +1,10 @@
+Lokalen Newtonverfahrens auf f(x)=1/20·x³ + x − 2 + cos(6/5·x):
+
+Mit Startwert x0=3,5 konvergiert das Verfahren schon nach wenigen Iterationen gegen die Nullstelle. 
+Die Schrittweiten und deren Funktionswerte werden dabei immer kleiner (quadratische Konvergenz).
+
+
+Konvergenz des lokalen Newtonverfahrens für f(x)=xⁿ−2:
+
+Für n=2, 3 und 4 zeigt das Verfahren in der semilogarithmischen Darstellung jeweils eine gerade Linie (asymptotisch quadratische Konvergenz). 
+Höheres n haben anfangs größeren Fehler, die Abnahme der Fehlergröße pro Iter bleibt aber im Grenzbereich praktisch identisch.
