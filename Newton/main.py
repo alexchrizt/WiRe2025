@@ -35,10 +35,7 @@ if __name__ == '__main__':
      # 5.2b
     f2  = lambda x: x**3 - 2*x + 2
     df2 = lambda x: 3*x**2 - 2
-    x0   = 0.0
-    β    = 0.33
-    δ    = 1e-3
-
+    x0 = 0.0
     try:
         xs_local = newton(f2, df2, x0, tol=1e-8, maxiter=50)
     except ValueError as e:
@@ -46,7 +43,7 @@ if __name__ == '__main__':
         xs_local = []           
 
     xs_global = newton_global(f2, df2, x0, tol=1e-8,
-                              maxiter=50, beta=β, delta=δ)
+                              maxiter=50, beta= 0.33, delta=1e-3)
     root = xs_global[-1]
 
     xs_plot = np.linspace(-2, 2, 400)
@@ -87,7 +84,7 @@ if __name__ == '__main__':
     plt.legend()
     plt.savefig('Local_vs_Global_Error.pdf')
     plt.close()
-    
+
     # 5.2c)
     plt.figure()
     for n in [2, 3, 4]:
