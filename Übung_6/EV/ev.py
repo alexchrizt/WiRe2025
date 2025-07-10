@@ -19,9 +19,10 @@ def power_method(A: np.ndarray[complex], v0: np.ndarray[complex], tol: float=1e-
     Output:
         tuple -> Array of the iterates lambda^(i) for the eigenvalue and the approximated eigenvector v
     """
-    v = v0.astype(complex) # Guarantee that the initial vector is complex
+    v = v0.astype(complex)  # Guarantee that the initial vector is complex
+    v = v / np.linalg.norm(v)  # Normalize the initial vector
     lambdas = np.zeros(max_iter, dtype=complex)
-    
+
     for k in range(max_iter):
         w = A @ v
         v = w / np.linalg.norm(w)
